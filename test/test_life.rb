@@ -6,8 +6,17 @@
 
 require 'helper'
 
-class TestLife < MiniTest::Unit::TestCase
-  def test_something_for_real
-    flunk "hey buddy, you should probably start testing for real"
+initial_world = [
+  [0, 1, 0, 1, 1],
+  [1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0],
+  [0, 1, 0, 1, 1],
+  [1, 1, 0, 0, 1]
+]
+
+describe World do
+  it "should require a beginning state" do
+    lambda {World.new}.must_raise(ArgumentError)
+    World.new(initial_world)
   end
 end
