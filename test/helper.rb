@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'bundler'
+require 'minitest/spec'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -11,7 +13,9 @@ require 'minitest/unit'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'life'
+require 'board'
+require 'cell'
+require 'position'
 
 class MiniTest::Unit::TestCase
 end
