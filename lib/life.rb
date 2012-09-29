@@ -1,5 +1,10 @@
 class World
   def initialize state
+    @state = state
+  end
+
+  def export
+    @state
   end
 end
 

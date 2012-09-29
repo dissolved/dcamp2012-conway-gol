@@ -15,8 +15,10 @@ initial_world = [
 ]
 
 describe World do
-  it "should require a beginning state" do
+  it "should require and record a beginning state" do
     lambda {World.new}.must_raise(ArgumentError)
-    World.new(initial_world)
+    world = World.new(initial_world)
+    world.export.must_be_same_as initial_world
   end
+
 end
