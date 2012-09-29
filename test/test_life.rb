@@ -21,4 +21,14 @@ describe World do
     world.export.must_be_same_as initial_world
   end
 
+  it "should have an initial time of zero" do
+    world = World.new(initial_world)
+    world.time.must_equal 0
+  end
+
+  it "should have a time greater than zero after iterating" do
+    world = World.new(initial_world)
+    world.iterate
+    world.time.must_be(:>, 0)
+  end
 end

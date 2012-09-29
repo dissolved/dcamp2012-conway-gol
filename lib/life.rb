@@ -1,10 +1,19 @@
 class World
   def initialize state
     @state = state
+    @time = 0
   end
 
   def export
     @state
+  end
+
+  def time
+    @time
+  end
+
+  def iterate
+    @time += 1
   end
 end
 
