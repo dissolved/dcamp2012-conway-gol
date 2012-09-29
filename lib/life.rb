@@ -14,11 +14,8 @@ class World
 
   def iterate
     cells_to_kill = []
-    puts "Iterate over #{count} cells"
     each do |cell|
-      puts "process #{cell}"
       if cell.neighbor_count(self) >= 2
-        puts "find life"
         [-1,0,1].each do |x|
           [-1,0,1].each do |y|
             c = Cell.new(x,y)
@@ -28,8 +25,7 @@ class World
           end
         end
       else
-        puts 'kill'
-        cells_to_kill cell
+        cells_to_kill << cell
       end
     end
     cells_to_kill.each{|c| @cells.delete c}
