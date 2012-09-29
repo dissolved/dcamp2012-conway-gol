@@ -14,6 +14,14 @@ initial_world = [
   [1, 1, 0, 0, 1]
 ]
 
+world_t1 = [
+  [0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1],
+  [0, 1, 0, 0, 0]
+]
+
 describe World do
   it "should require and record a beginning state" do
     lambda {World.new}.must_raise(ArgumentError)
@@ -30,5 +38,11 @@ describe World do
     world = World.new(initial_world)
     world.iterate
     world.time.must_be(:>, 0)
+  end
+
+  it "should have the correct state after 1 iteration" do
+    world = World.new(initial_world)
+    world.iterate
+    world.export.must_be_same_as world_t1
   end
 end

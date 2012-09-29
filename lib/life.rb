@@ -14,20 +14,23 @@ class World
 
   def iterate
     @time += 1
+    calculate_state(@state)
   end
+
+  protected
+  def calculate_state(state)
+    if state.size > 3
+      # calculate_state(state.slice(0...state.size - 1))
+    else
+      #do stuff
+    end
+  end
+
+  def calculate_atom_state(state)
+    #   neighbors = world[0][0] + world[0][1] + world[0][2]
+    #   neighbors += world[1][0] + world[1][2]
+    #   neighbors += world[2][0] + world[2][1] + world [2][2]
+    #   #do stuff
+  end
+
 end
-
-
-#
-# def evaluate_world(world)
-#   if world.size > 3
-#     evaluate_world(world.slice(0...world.size - 1))
-#
-# end
-#
-# def evaluate_atom_world(world)
-#   neighbors = world[0][0] + world[0][1] + world[0][2]
-#   neighbors += world[1][0] + world[1][2]
-#   neighbors += world[2][0] + world[2][1] + world [2][2]
-#   #do stuff
-# end
