@@ -17,20 +17,42 @@ class World
     calculate_state(@state)
   end
 
-  protected
-  def calculate_state(state)
-    if state.size > 3
-      # calculate_state(state.slice(0...state.size - 1))
-    else
-      #do stuff
+  def neighbors(x,y)
+    count = 0
+    [-1, 0, 1].each do |dx|
+      [-1, 0, 1].each do |dy|
+        count += @state[y + dy][x + dx] unless dx == 0 and dy == 0
+      end
     end
+    count
   end
 
-  def calculate_atom_state(state)
-    #   neighbors = world[0][0] + world[0][1] + world[0][2]
-    #   neighbors += world[1][0] + world[1][2]
-    #   neighbors += world[2][0] + world[2][1] + world [2][2]
-    #   #do stuff
+  protected
+
+  def calculate_state(state)
+    # next_state = []
+    # state.each_with_index do |row, y|
+    #   next_state << []
+    #   row.size.times do |x|
+    #     neighbors(x,y)
+    #   end
+    # end
   end
+
+  # don't do recursion solution yet... get test to pass, then refactor
+  # def calculate_state(state)
+  #   if state.size > 3
+  #     # calculate_state(state.slice(0...state.size - 1))
+  #   else
+  #     #do stuff
+  #   end
+  # end
+  #
+  # def calculate_atom_state(state)
+  #   #   neighbors = world[0][0] + world[0][1] + world[0][2]
+  #   #   neighbors += world[1][0] + world[1][2]
+  #   #   neighbors += world[2][0] + world[2][1] + world [2][2]
+  #   #   #do stuff
+  # end
 
 end
