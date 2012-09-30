@@ -39,19 +39,19 @@ describe World do
     world.iterate
     world.time.must_be(:>, 0)
   end
-  
+
   it "should correctly report the number of neighbors" do
     world = World.new(initial_world)
     world.neighbors(0,0).must_equal(8)
+    world.neighbors(0,4).must_equal(6)
     world.neighbors(1,1).must_equal(3)
     world.neighbors(2,2).must_equal(5)
   end
-  
-  
-  # it "should have the correct state after 1 iteration" do
-  #   pending
-  #   world = World.new(initial_world)
-  #   world.iterate
-  #   world.export.must_equal(world_t1)
-  # end
+
+
+  it "should have the correct state after 1 iteration" do
+    world = World.new(initial_world)
+    world.iterate
+    world.export.must_equal(world_t1)
+  end
 end
