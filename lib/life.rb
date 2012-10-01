@@ -1,6 +1,8 @@
 class World
   def initialize state
     @state = state
+    @height = @state.size
+    @width = @state[0].size
     @time = 0
   end
 
@@ -17,10 +19,16 @@ class World
     @state = calculate_state
   end
 
+  def [](x,y)
+    @state[y % @height][x % @width]
+  end
+  #
+  # def []=(x,y,value)
+  #   @state[y][x] = value
+  # end
+
   def alive?(x,y)
-    x = x >= @state[0].size ? 0 : x
-    y = y >= @state.size ? 0 : y
-    @state[y][x] != 0
+    self[x,y] != 0
   end
 
   def neighbors(x,y)

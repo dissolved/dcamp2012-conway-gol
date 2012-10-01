@@ -40,6 +40,20 @@ describe World do
     world.time.must_be(:>, 0)
   end
 
+  it "should correctly report the value at given coordinates" do
+    world = World.new(initial_world)
+    world[0,0].must_equal(0)
+    world[1,0].must_equal(1)
+    world[1,1].must_equal(1)
+  end
+
+  it "should wrap around the world" do
+    world = World.new(initial_world)
+    world[5,0].must_equal(0)
+    world[0,5].must_equal(0)
+    world[3,5].must_equal(1)
+  end
+
   it "should correctly report the number of neighbors" do
     world = World.new(initial_world)
     world.neighbors(0,0).must_equal(8)
