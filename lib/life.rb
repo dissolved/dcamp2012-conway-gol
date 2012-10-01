@@ -1,31 +1,31 @@
 class World
+  attr_reader :width, :height
+
   def initialize state
-    @state = state
+    @state = Marshal.load(Marshal.dump(state))
     @height = @state.size
     @width = @state[0].size
-    @time = 0
   end
 
   def export
     @state
   end
 
-  def time
-    @time
-  end
-
-  def iterate
-    @time += 1
-    @state = calculate_state
+  def to_s
+    @state.inspect.gsub("], ", "],\n ")
   end
 
   def [](x,y)
     @state[y % @height][x % @width]
   end
-  #
-  # def []=(x,y,value)
-  #   @state[y][x] = value
-  # end
+
+  def dup
+    Marshal.load(Marshal.dump(self))
+  end
+
+  def []=(x,y,value)
+    @state[y % @height][x % @width] = value
+  end
 
   def alive?(x,y)
     self[x,y] != 0
@@ -41,10 +41,27 @@ class World
     count
   end
 
+end
+
+
+class God
+  attr_reader :time
+  attr_reader :world
+
+  def initialize(world)
+    @time = 0
+    @world = world.dup
+  end
+
+  def iterate
+    @time += 1
+    @world = calculate_world
+  end
+
   def fate(x,y)
-    case neighbors(x,y)
+    case @world.neighbors(x,y)
     when 0..1 then 0
-    when 2 then @state[y][x]
+    when 2 then @world[x,y]
     when 3 then 1
     when 4..8 then 0
     end
@@ -52,15 +69,14 @@ class World
 
   protected
 
-  def calculate_state
-    next_state = []
-    @state.each_with_index do |row, y|
-      next_state << []
-      row.size.times do |x|
-        next_state[y] << fate(x,y)
+  def calculate_world
+    @world.dup.tap do |next_world|
+      @world.width.times do |x|
+        @world.height.times do |y|
+          next_world[x,y] = fate(x,y)
+        end
       end
     end
-    next_state
   end
 
   # don't do recursion solution yet... get test to pass, then refactor
